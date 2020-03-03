@@ -1,0 +1,23 @@
+{
+    "require": {
+        "php":">=5.3.0",
+        "vlucas/valitron": "*.*",
+        "guzzlehttp/guzzle": "^6.3"                
+     },
+	"autoload": {
+	  "psr-4": {
+	    "StartController\\": "controllers/",	  
+	    "CartController\\": "controllers/",	 	
+	    "CheckoutController\\": "controllers/",	 	   	        	
+	    "ProductModel\\": "models/",
+	    "CartModel\\": "models/",
+	    "ApiModel\\": "models/",
+	    "SeoModel\\": "models/",
+	    "MailerModel\\": "models/",
+	    "ClearModel\\": "models/"
+	  }
+	},
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+
+}

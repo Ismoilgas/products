@@ -1,0 +1,100 @@
+copy composer.json + change
+
+----------------------------------------------------------
+controllers + models + !views/.../index
+
+//require_once './controllers/LoginController.php';
+require_once './vendor/autoload.php';
+
+use LoginController\LoginController;
+
+$controller=new LoginController();
+
+require_once './views/selectedaction.php';
+
+----------------------------------------------------------
+
+...
+
+    "require": {
+        "php":">=5.3.0",
+        "vlucas/valitron": "*.*"
+     },
+
+...  
+
++
+delete Valitron from composer.json
+
+delete directory Valitron (!!!validator_lang shouldn't be delete)
+
++
+!composer update
+
+----------------------------------------------------------     
+
+...
+
+    "require": {
+        "php":">=5.3.0",
+        "vlucas/valitron": "*.*",
+        "guzzlehttp/guzzle": "^6.3"        
+     },
+
+...
+
++
+!composer update
+
+---------------------------------------------------------- 
+
+...
+
+        $client = new \GuzzleHttp\Client([
+           'headers' => [
+               //'Authorization' => '9267585bb333341dc049321d4e74398f',
+               //'Content-Type' => 'application/json',
+            ]
+        ]);
+        $response = $client->request('GET', 'http://api.25one.com.ua/api_mail.php?email_to=' . $myemail . '&title=' . $title . '&message=' . $message,
+         [
+            //...
+         ]);    
+        return json_decode($response->getBody()->getContents());    
+
+...
+
+----------------------------------------------------------
+
+cd www/products (!for Vagrant cd var/www/html/products)
+
+git init
+git config --global user.name "25one"
+git config --global user.email "25one@ukr.net"
+git config --global core.safecrlf false
+
+git remote add products https://github.com/25one/products
+
+git add * -f
+git add .htaccess
+(git add .env -f — for laravel)
+
+git commit -m 'products'
+
+git push products master
+
+rm -rf .git
+
+----------------------------------------------------------
+
+cd /
+cd www (!for Vagrant cd var/www/html - !!!without /products)
+git clone https://github.com/25one/products.git
+(if folder exists, cd products and
+git clone https://github.com/25one/products.git .)
+
+cd products
+rm -rf .git
+
+
+
